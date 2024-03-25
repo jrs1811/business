@@ -1,0 +1,47 @@
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFF1BE;
+    font-size: 65px;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    flex: 0 0 auto;
+}
+
+.Main {
+    flex-direction: column;
+    font-size: 20px;
+    float: right;
+    text-align: right;
+    color: red;
+}
+
+/* body {
+    background: linear-gradient(to bottom, #FFB7D9, #D8BAFF) no-repeat;
+    background-size: cover; 
+    margin: 0px;
+    height: 100vh;
+} */
+.Cart {
+    color: black;
+}
+
+#cart-items li {
+    display: flex;
+    flex-direction: column; /* Display items vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 0; /* Remove default padding */
+    list-style-type: none; /* Remove default list style */
+    border: 3px black solid;
+    margin-bottom: 20px;
+    border-radius: 1px; 
+}
+.remove button {
+    background-color: #ff6347; 
+    color: #fff; 
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}

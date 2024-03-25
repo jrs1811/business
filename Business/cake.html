@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAKE_ASAP</title>
     <link rel="stylesheet" href="cake.css">
 </head>
+
 <body>
-  
+
     <div class="flex-container">
         <div>Rose's Pastry Banquet</div>
-          <div class="Main">
+        <div class="Main">
             <div>(520)-222-2222</div>
             <div style="color: Blue"> 6901 w mcdowell rd 85235</div>
         </div>
-        <div class="cart"><img src="https://cdn.pixabay.com/photo/2021/11/05/00/19/shopping-6769726_1280.png" alt="Checkout" width=50px height=50px></img></div>
-        </div>
+        <div class="cart"><a href="cart.html"><img
+                    src="https://cdn.pixabay.com/photo/2021/11/05/00/19/shopping-6769726_1280.png" alt="Checkout"
+                    width=50px height=50px></img></a></div>
+    </div>
     </div>
     <div class="sections">
         <div class="onTop">
@@ -36,7 +40,10 @@
             <div class="feature">FEATURED</div>
             <div class="boxCU">
                 <div class="picOfCupcake">
-                    <img src="image-removebg-preview (10).png" alt="picture of a cupcake" width=200px height=200px></img>
+                    <a href="cupcakeDET.html">
+                        <img src="image-removebg-preview (10).png" alt="picture of a cupcake" width=200px
+                            height=200px></img>
+                    </a>
                 </div>
                 <div class="details">
                     <div class="price">$20</div>
@@ -48,11 +55,14 @@
             <div class="feature">FEATURED</div>
             <div class="boxCO">
                 <div class="picOfCookie">
-                    <img src="image-removebg-preview (12).png" alt="picture of a cookie" width=200px height=200px></img>
+                    <a href="cookieDET.html">
+                        <img src="image-removebg-preview (12).png" alt="picture of a cupcake" width=200px
+                            height=200px></img>
+                    </a>
                 </div>
                 <div class="details">
                     <div class="price">$15</div>
-                    <div class="Name">Star Delight</div>
+                    <div class="Name">Choco-Crumble</div>
                 </div>
             </div>
         </div>
@@ -81,7 +91,8 @@
                 <div class="custom">CUSTOM</div>
                 <div class="boxCU">
                     <div class="picOfCupcake">
-                        <img src="image-removebg-preview (14).png" alt="picture of a cupcake" width=200px height=200px></img>
+                        <img src="image-removebg-preview (14).png" alt="picture of a cupcake" width=200px
+                            height=200px></img>
                     </div>
                     <div class="details">
                         <div class="price">$25</div>
@@ -93,7 +104,8 @@
                 <div class="custom">CUSTOM</div>
                 <div class="boxCO">
                     <div class="picOfCookie">
-                        <img src="image-removebg-preview (15).png" alt="picture of a cookie" width=200px height=200px></img>
+                        <img src="image-removebg-preview (15).png" alt="picture of a cookie" width=200px
+                            height=200px></img>
                     </div>
                     <div class="details">
                         <div class="price">$20</div>
@@ -103,5 +115,117 @@
             </div>
         </div>
     </div>
+    <button class="customMade" id="customMade">Create Custom</button>
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span id='x' class="close">&times;</span>
+            <h2>Create Custom Item</h2>
+            
+            <form id="customForm">
+                <div class="area1">
+                    <div class="typesCustom">
+                        <button id="customTypeCake" onclick="showCustomArea()">Cakes</button> <br>
+                        <button id="customTypeCupcake" onclick="showCustomArea()">Cupcakes</button><br>
+                        <button id="customTypeCookie" onclick="showCustomArea()">Cookies</button>
+                    </div>
+                
+                <div class="sectionsCustom" hidden>
+                    <label for="cakeType">Select Cake Type:</label>
+                    <select id="cakeType">
+                        <option value="vanilla">Vanilla</option>
+                        <option value="chocolate">Chocolate</option><br>
+                        <!-- Add more options as needed -->
+                    </select>
+
+                    <br>
+                    <label for="toppings">Select Toppings:</label>
+                    <br>
+                    <input type="checkbox" id="chocolateChips" name="toppings" value="chocolateChips"> 
+                    <label for="chocolateChips">Chocolate Chips</label><br>
+                    <input type="checkbox" id="sprinkles" name="toppings" value="sprinkles">
+                    <label for="sprinkles">Sprinkles</label><br>
+                    <!-- Add more checkboxes for other toppings -->
+
+                    <label for="layers">Select Number of Layers:</label>
+                    <input type="number" id="layers" min="1" max="3" value="1">
+
+                    <div>Total Price: $<span id="totalPrice">0</span></div>
+                </div>
+                </div>
+                <input type="text" id="customName" placeholder="Custom Item Name"><br>
+                <!-- <input type="number" id="customPrice" placeholder="Custom Item Price"><br> -->
+                <input type="number" id="customQuantity" placeholder="Custom Item Quantity"><br>
+                <button type='submit' onclick="addToCart(document.getElementById('Custom Item Name'),document.getElementById('totalPrice'),document.getElementById('customQuantity'))">Add to Cart</button>
+                <script>
+        const cakeTypeSelect = document.getElementById('cakeType');
+        const toppingsCheckboxes = document.querySelectorAll('input[name="toppings"]');
+        const layersInput = document.getElementById('layers');
+        const totalPriceSpan = document.getElementById('totalPrice');
+        const addToCartButton = document.getElementById('addToCart');
+
+        // Add event listeners
+        cakeTypeSelect.addEventListener('change', updatePrice);
+        toppingsCheckboxes.forEach(checkbox => checkbox.addEventListener('change', updatePrice));
+        layersInput.addEventListener('input', updatePrice);
+        addToCartButton.addEventListener('click', addToCart);
+
+        // Function to calculate and update the price
+        function updatePrice() {
+            // Get the base price of the cake based on the selected type
+            let basePrice = 0;
+            if (cakeTypeSelect.value === 'vanilla') {
+                basePrice = 20;
+            } else if (cakeTypeSelect.value === 'chocolate') {
+                basePrice = 25;
+            }
+            
+            // Calculate additional costs for toppings and layers
+            let additionalCost = 0;
+            toppingsCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    additionalCost += 5; // Adjust based on actual prices
+                }
+            });
+            const layersCost = parseInt(layersInput.value) * 10; // Adjust based on actual prices
+
+            // Update total price
+            const totalPrice = basePrice + additionalCost + layersCost;
+            totalPriceSpan.textContent = totalPrice;
+        }
+
+        // Function to add the custom cake to the cart
+        function addToCart() {
+            // Get selected options
+            const cakeType = cakeTypeSelect.value;
+            const selectedToppings = Array.from(toppingsCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+            const numberOfLayers = parseInt(layersInput.value);
+
+            // Construct cake object with selected options
+            const customCake = {
+                type: cakeType,
+                toppings: selectedToppings,
+                layers: numberOfLayers,
+                // Add more properties as needed
+            };
+
+            // Add custom cake to cart (implement this part based on your existing cart logic)
+            // Example: addToCart(customCake);
+            console.log('Custom cake added to cart:', customCake);
+        }
+        function showCustomArea() {
+            console.log("Working")
+            var area1 = document.querySelector('.sectionsCustom');
+            area1.removeAttribute('hidden');
+        }
+        </script>
+            </form>
+        </div>
+    </div>
+    <div id="cart-items" hidden></div>
+    <script src="backup.js"></script>
+    <script src="custom.js"></script>
 </body>
+
 </html>
